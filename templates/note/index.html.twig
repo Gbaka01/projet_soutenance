@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note index{% endblock %}
+
+{% block body %}
+    <h1>Note index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description1</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.id }}</td>
+                <td>{{ note.description1 }}</td>
+                <td>
+                 {% if is_granted('ROLE_VISITEUR') %}
+                    <a href="{{ path('app_note_show', {'id': note.id}) }}">show</a>
+                    <a href="{{ path('app_note_edit', {'id': note.id}) }}">edit</a>
+                     {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ {% if is_granted('ROLE_VISITEUR') %}
+    <a class="btn btn-primary" href="{{ path('app_note_new') }}" role="button">Créer nouveau</a>
+{% endif %}
+{% endblock %}

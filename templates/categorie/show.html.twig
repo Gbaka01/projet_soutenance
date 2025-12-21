@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1>Categorie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Description2</th>
+                <td>{{ categorie.description2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_categorie_index') }}" role="button">Retour vers l'accueil</a>
+{% if is_granted('ROLE_VISITEUR') %}
+    <a class="btn btn-info" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" role="button">Modifier</a>
+
+    {{ include('categorie/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

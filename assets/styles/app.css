@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+body {
+  background-image: url('https://www.connaissancedesarts.com/wp-content/thumbnails/uploads/2019/04/cda19_hs_modele_noir_benoist_focus-tt-width-1200-height-675-fill-0-crop-1-bgcolor-ffffff.jpg');
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

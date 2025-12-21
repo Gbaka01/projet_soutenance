@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+    <h1>Categorie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description2</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.description2 }}</td>
+           
+                <td>
+                     {% if is_granted('ROLE_VISITEUR') %} 
+                    <a class="btn btn-warning" href="{{ path('app_categorie_show', {'id': categorie.id}) }}" role="button">Voir</a>
+                   
+                    <a class="btn btn-info" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" role="button">Modifier</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% if is_granted('ROLE_VISITEUR') %}
+    <a class="btn btn-primary" href="{{ path('app_categorie_new') }}" role="button">Créer nouveau</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recette index{% endblock %}
+
+{% block body %}
+    <h1>Recette index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description4</th>
+                <th>Fiche</th>
+                <th>Notes</th>
+                <th>Avis</th>
+                <th>Categories</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recette in recettes %}
+            <tr>
+                <td>{{ recette.id }}</td>
+                <td>{{ recette.description3 }}</td>
+                <td>{{ recette.fiche }}</td>
+                <td>
+                    <ul>
+                        {% for note in recette.notes %}
+                        <li>{{ note.note }} / 5</li>
+                        {% endfor %}
+                    </ul>
+</td>
+                <td>
+                    <ul>
+                        {% for note in recette.notes %}
+                        <li>{{ note.description1 }}</li>
+                        {% endfor %}
+                    </ul>
+</td>
+                <td> 
+                    <ul>
+                       {% for categorie in recette.categories %}
+                       <li>{{ categorie.description2 }}</li>
+                       {% endfor %}
+                    </ul>
+          </td>
+            
+                <td>
+                     {% if is_granted('ROLE_VISITEUR') %}
+                    <a class="btn btn-warning" href="{{ path('app_recette_show', {'id': recette.id}) }}" role="button">Voir</a>
+                    {% endif %}
+                      {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-info" href="{{ path('app_recette_edit', {'id': recette.id}) }}" role="button">Modifier</a>
+                 {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% if is_granted('ROLE_ADMIN') %}
+    <a class="btn btn-primary" href="{{ path('recette_new') }}" role="button">Créer nouveau</a>
+{% endif %}
+{% endblock %}
