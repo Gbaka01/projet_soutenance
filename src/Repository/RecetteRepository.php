@@ -19,7 +19,7 @@ class RecetteRepository extends ServiceEntityRepository
 {
     $qb = $this->createQueryBuilder('r');
 
-    if ($fiche) {
+    if ($nom) {
         $qb->andWhere('r.nom LIKE :nom')
            ->setParameter('nom', '%' . $nom . '%');
     }
