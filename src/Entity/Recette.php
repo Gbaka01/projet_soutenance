@@ -34,8 +34,6 @@ class Recette
     #[ORM\Column(length: 255)]
     private ?string $avatar2 = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
 
 
 
@@ -130,17 +128,4 @@ class Recette
 
         return $this;
     }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
 }
