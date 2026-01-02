@@ -26,16 +26,18 @@
         </tbody>
     </table> #}
     <div class= "d-flex text-light">{{ recette.fiche }}</div>
-    <div class= "d-flex justify-content-between"> {{ recette.avatar2 }}</div>
-    
-    <div class= "d-flex justify-content-between">
+       <div class= "d-flex justify-content-between">
    
                        <span>{% for categorie in recette.categories %}
                        <a href="{{ path('app_ingredient_index') }}">{{ categorie.description2 }}</a>
                        {% endfor %}
                     </span>
+                
                      <span class="text-light">Préparation:120 minutes</span>
-                     </div>
+                </div>    
+     <div class="card m-5 col-8"> <img src="{{ asset('images/' ~ recette.avatar2) }}" class="card-img-top" alt="..."></div>
+    
+ 
                    
    <div class= "d-flex justify-content-between text-light"><span class="d-flex text-light border border-primary col-8 p-5">{{ recette.description3 }}</span> 
   
@@ -50,6 +52,7 @@
 <h1 class="text-light">Commentaires</h1>
 <div class= "d-flex text-light"> <ul>{% for note in recette.notes %}
 <li class="text-light">{{ note.description1 }}</li>
+
  {% endfor %}
 </ul>
 
@@ -57,7 +60,7 @@
     <a class="btn btn-primary" href="{{ path('app_recette_index') }}" role="button">Retour vers l'accueil</a>
 {% if is_granted('ROLE_ADMIN') %}
     <a class="btn btn-info" href="{{ path('app_recette_edit', {'id': recette.id}) }}" role="button">Modifier</a>
+{{ include('recette/_delete_form.html.twig', { recette: recette }) }}
 
-    {{ include('recette/_delete_form.html.twig') }}
     {% endif %}
 {% endblock %}

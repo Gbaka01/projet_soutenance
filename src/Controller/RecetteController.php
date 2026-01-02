@@ -19,7 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class RecetteController extends AbstractController
 {
     // 📌 LISTE + FILTRE PAR NOM
-    #[IsGranted('ROLE_VISITEUR')]
+    #[IsGranted(new Expression("is_granted('ROLE_ADMIN') or is_granted('ROLE_VISITEUR')"))]
     #[Route('', name: 'app_recette_index', methods: ['GET'])]
     public function index(
         Request $request,
@@ -91,7 +91,7 @@ final class RecetteController extends AbstractController
     }
 
     // 📌 MODIFIER
-    #[IsGranted(new Expression("is_granted('ROLE_ADMIN') or is_granted('ROLE_VISITEUR')"))]
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_recette_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
@@ -108,6 +108,7 @@ final class RecetteController extends AbstractController
 
         return $this->render('recette/edit.html.twig', [
             'form' => $form->createView(),
+            'recette' => $recette,   
         ]);
     }
 
