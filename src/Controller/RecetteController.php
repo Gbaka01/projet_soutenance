@@ -91,7 +91,7 @@ final class RecetteController extends AbstractController
     }
 
     // 📌 MODIFIER
-    #[IsGranted('ROLE_VISITEUR')]
+    #[IsGranted(new Expression("is_granted('ROLE_ADMIN') or is_granted('ROLE_VISITEUR')"))]
     #[Route('/{id}/edit', name: 'app_recette_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
