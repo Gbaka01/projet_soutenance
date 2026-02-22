@@ -6,7 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -63,10 +63,14 @@ class RegistrationForm extends AbstractType
                 'constraints' => [
                     new NotBlank(message: 'Veuillez entrer un mot de passe'),
                     new Length(
-                        min: 6,
+                        min: 8,
                         minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères',
                         max: 4096
                     ),
+                     new Regex(
+            pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/',
+            message: 'Mot de passe trop faible : 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial, 8+ caractères.'
+        ),
                 ],
             ])
 
